@@ -77,7 +77,6 @@ class LSTMModel:
     def __init__(self, vocab_size, num_hiddens, device, get_params, init_state, forward_fn):
         self.vocab_size = vocab_size
         self.num_hiddens = num_hiddens
-        self.device = device
         self.params = get_params(vocab_size, num_hiddens, device)   # 初始化参数
         self.init_state = init_state                               # 初始化状态
         self.forward_fn = forward_fn                               # 前向传播
@@ -86,8 +85,8 @@ class LSTMModel:
         X = F.one_hot(X.T, self.vocab_size).type(torch.float32)
         return self.forward_fn(X, state, self.params)              # 前向传播
 
-    def begin_state(self, batch_size, *args, **kwargs):
-        return self.init_state(batch_size, self.num_hiddens, self.device)  # 初始化状态
+    def begin_state(self, batch_size, device):
+        return self.init_state(batch_size, self.num_hiddens, device)  # 初始化状态
 
 
 def predict_ch8(prefix, num_preds, lstm_model, vocab):
