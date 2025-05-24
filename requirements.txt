@@ -1,4 +1,11 @@
-
-pandas>=2.0.3
-
-
+d2l
+pandas
+numpy
+scikit-learn
+matplotlib
+seaborn
+torch
+torchvision
+jieba
+notebook==6.4.5
+traitlets<5.10
